@@ -32,7 +32,7 @@ mod tests {
         let result = part1::resolve(&lines);
         println!("Part 1: {}", result);
     }
-    
+
     #[test]
     fn test_day2_part2() {
         let lines = read_input("inputs/day2.txt").unwrap();

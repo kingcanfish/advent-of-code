@@ -6,10 +6,10 @@ pub(crate) fn check(elements: &[i64]) -> bool {
     if crate::day2::part1::check(elements) {
         return true;
     }
-    
+
     // 尝试移除每一个可能的元素
     (0..elements.len()).any(|i| {
-        let new_elements = [&elements[..i], &elements[i+1..]].concat();
+        let new_elements = [&elements[..i], &elements[i + 1..]].concat();
         crate::day2::part1::check(&new_elements)
     })
 }

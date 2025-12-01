@@ -41,14 +41,14 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        let (left, right) = read_input("inputs/day1_part1.txt").unwrap();
+        let (left, right) = read_input("inputs/day1.txt").unwrap();
         let result = part1::resolve(&left, &right);
         println!("{}", result);
     }
 
     #[test]
     fn test_part2() {
-        let (left, right) = read_input("inputs/day1_part1.txt").unwrap();
+        let (left, right) = read_input("inputs/day1.txt").unwrap();
         let result = part2::resolve(&left, &right);
         println!("{}", result);
     }

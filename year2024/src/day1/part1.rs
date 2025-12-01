@@ -1,10 +1,10 @@
 #[allow(unused)]
-pub(crate) fn resolve(left: &Vec<i64>, right: &Vec<i64>) -> i64 {
+pub(crate) fn resolve(left: &[i64], right: &[i64]) -> i64 {
     let mut result = 0;
 
     // 创建可变副本并排序
-    let mut sorted_left = left.clone();
-    let mut sorted_right = right.clone();
+    let mut sorted_left = left.to_owned();
+    let mut sorted_right = right.to_owned();
     sorted_left.sort();
     sorted_right.sort();
 

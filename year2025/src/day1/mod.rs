@@ -1,6 +1,11 @@
+use std::path::PathBuf;
+
 #[allow(unused)]
 pub(crate) fn read_input() -> Vec<String> {
-    std::fs::read_to_string("inputs/day1.txt")
+    let path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("inputs")
+        .join("day1.txt");
+    std::fs::read_to_string(path)
         .expect("Failed to read input.txt")
         .lines()
         .map(|s| s.to_string())
@@ -106,6 +111,14 @@ pub(crate) fn resolve_part2(inputs: &[String]) -> Result<i64, Box<dyn Error>> {
     Ok(zero_count)
 }
 
+pub(crate) fn run() {
+    let inputs = read_input();
+    println!(
+        "day1 part1: {:?}, part2: {:?}",
+        resolve_part1(&inputs),
+        resolve_part2(&inputs)
+    );
+}
 fn parse_instruction(line: &str) -> Result<(char, i64), Box<dyn Error>> {
     let direction = line.chars().next().ok_or("Invalid input")?;
     let amount = line[1..].parse()?;

@@ -26,7 +26,7 @@ pub(crate) fn read_input() -> Result<Vec<(i64, i64)>, Box<dyn Error>> {
 #[allow(unused)]
 pub(crate) fn solve_part1(input: &[(i64, i64)]) -> i64 {
     let mut result = 0i64;
-    input.into_iter().for_each(|(a, b)| {
+    input.iter().for_each(|(a, b)| {
         for i in *a..(*b + 1) {
             let s = i.to_string();
             if s.len() < 2 || s.len() % 2 != 0 {
@@ -34,7 +34,7 @@ pub(crate) fn solve_part1(input: &[(i64, i64)]) -> i64 {
             }
             let mid = s.len() / 2;
 
-            if (&s[0..mid] == &s[mid..]) {
+            if (s[0..mid] == s[mid..]) {
                 result += i;
             }
         }
@@ -45,7 +45,7 @@ pub(crate) fn solve_part1(input: &[(i64, i64)]) -> i64 {
 #[allow(unused)]
 pub(crate) fn solve_part2(input: &[(i64, i64)]) -> i64 {
     let mut result = 0i64;
-    input.into_iter().for_each(|(a, b)| {
+    input.iter().for_each(|(a, b)| {
         for i in *a..(*b + 1) {
             if is_repeated_elegant_math(i) {
                 result += i;
@@ -72,7 +72,7 @@ fn is_repeated_elegant_math(n: i64) -> bool {
 pub(crate) fn run() {
     let inputs = read_input().unwrap();
     println!(
-        "day1 part1: {:?}, part2: {:?}",
+        "day2 part1: {:?}, part2: {:?}",
         solve_part1(&inputs),
         solve_part2(&inputs)
     );

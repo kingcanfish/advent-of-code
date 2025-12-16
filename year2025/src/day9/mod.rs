@@ -41,17 +41,13 @@ fn point_in_polygon(point: (i64, i64), polygon: &[(i64, i64)]) -> bool {
         }
 
         // Check if point is on a horizontal edge
-        if y1 == y2 && y == y1 {
-            if x >= x1.min(x2) && x <= x1.max(x2) {
-                return true;
-            }
+        if y1 == y2 && y == y1 && x >= x1.min(x2) && x <= x1.max(x2) {
+            return true;
         }
 
         // Check if point is on a vertical edge
-        if x1 == x2 && x == x1 {
-            if y >= y1.min(y2) && y <= y1.max(y2) {
-                return true;
-            }
+        if x1 == x2 && x == x1 && y >= y1.min(y2) && y <= y1.max(y2) {
+            return true;
         }
 
         // Ray casting: check if horizontal ray from point intersects edge
@@ -151,8 +147,11 @@ fn resolve_part2(points: &[(i64, i64)]) -> i64 {
 pub(crate) fn run() {
     let input = read_file("day9.txt").unwrap();
     let points = parse_input(&input);
-    println!("Day9 Part 1: {}", resolve_part1(&points));
-    println!("Day9 Part 2: {}", resolve_part2(&points));
+    println!(
+        "Day9 Part 1: {}, Part2: {}",
+        resolve_part1(&points),
+        resolve_part2(&points)
+    );
 }
 
 #[cfg(test)]

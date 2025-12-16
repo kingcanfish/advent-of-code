@@ -18,7 +18,7 @@ fn parse_input(content: &str) -> (Vec<Vec<char>>, usize) {
     (grid, start_col)
 }
 
-fn count_splits(grid: &Vec<Vec<char>>, start_col: usize) -> usize {
+fn count_splits(grid: &[Vec<char>], start_col: usize) -> usize {
     let rows = grid.len();
     let cols = if rows > 0 { grid[0].len() } else { 0 };
 
@@ -62,7 +62,7 @@ fn count_splits(grid: &Vec<Vec<char>>, start_col: usize) -> usize {
     split_count
 }
 
-fn count_timelines(grid: &Vec<Vec<char>>, start_col: usize) -> usize {
+fn count_timelines(grid: &[Vec<char>], start_col: usize) -> usize {
     let rows = grid.len();
     let cols = if rows > 0 { grid[0].len() } else { 0 };
 

@@ -22,7 +22,7 @@ impl Problem {
     }
 }
 
-fn unmarshal_input(content: &String) -> Result<Vec<Problem>, Box<dyn Error>> {
+fn unmarshal_input(content: &str) -> Result<Vec<Problem>, Box<dyn Error>> {
     let lines: Vec<&str> = content.lines().collect();
     if lines.is_empty() {
         return Ok(vec![]);
@@ -61,10 +61,12 @@ fn unmarshal_input(content: &String) -> Result<Vec<Problem>, Box<dyn Error>> {
             }
         }
 
-        if !numbers.is_empty() && operation.is_some() {
+        if let Some(op) = operation
+            && !numbers.is_empty()
+        {
             problems.push(Problem {
                 numbers,
-                operation: operation.unwrap(),
+                operation: op,
             });
         }
     }
@@ -72,7 +74,7 @@ fn unmarshal_input(content: &String) -> Result<Vec<Problem>, Box<dyn Error>> {
     Ok(problems)
 }
 
-fn unmarshal_input_part2(content: &String) -> Result<Vec<Problem>, Box<dyn Error>> {
+fn unmarshal_input_part2(content: &str) -> Result<Vec<Problem>, Box<dyn Error>> {
     let lines: Vec<&str> = content.lines().collect();
     if lines.is_empty() {
         return Ok(vec![]);
@@ -129,25 +131,27 @@ fn unmarshal_input_part2(content: &String) -> Result<Vec<Problem>, Box<dyn Error
         let mut numbers = Vec::new();
         for c in (start..end).rev() {
             let mut digits = String::new();
-            for r in 0..grid.len() - 1 {
+            for row in grid.iter().take(grid.len() - 1) {
                 // Exclude operator row
-                let ch = grid[r][c];
+                let ch = row[c];
                 if ch.is_numeric() {
                     digits.push(ch);
                 }
             }
 
-            if !digits.is_empty() {
-                if let Ok(num) = digits.parse::<i64>() {
-                    numbers.push(num);
-                }
+            if !digits.is_empty()
+                && let Ok(num) = digits.parse::<i64>()
+            {
+                numbers.push(num);
             }
         }
 
-        if !numbers.is_empty() {
+        if let Some(op) = operation
+            && !numbers.is_empty()
+        {
             problems.push(Problem {
                 numbers,
-                operation: operation.unwrap(),
+                operation: op,
             });
         }
     }
@@ -155,12 +159,12 @@ fn unmarshal_input_part2(content: &String) -> Result<Vec<Problem>, Box<dyn Error
     Ok(problems)
 }
 
-fn resolve_part1(input: &String) -> i64 {
+fn resolve_part1(input: &str) -> i64 {
     let problems = unmarshal_input(input).unwrap();
     problems.iter().map(|p| p.solve()).sum()
 }
 
-fn resolve_part2(input: &String) -> i64 {
+fn resolve_part2(input: &str) -> i64 {
     let problems = unmarshal_input_part2(input).unwrap();
     problems.iter().map(|p| p.solve()).sum()
 }

@@ -1,7 +1,7 @@
 use crate::file::read_file;
 use std::error::Error;
 
-pub(crate) fn unmarshal_input(content: &String) -> Result<Vec<Vec<char>>, Box<dyn Error>> {
+pub(crate) fn unmarshal_input(content: &str) -> Result<Vec<Vec<char>>, Box<dyn Error>> {
     let result: Vec<Vec<char>> = content
         .lines()
         .filter(|line| !line.trim().is_empty())
@@ -35,7 +35,7 @@ fn count_neighbors(grid: &[Vec<char>], row: usize, col: usize) -> i32 {
     count
 }
 
-pub(crate) fn resolve_part1(input: &String) -> i64 {
+pub(crate) fn resolve_part1(input: &str) -> i64 {
     let input = unmarshal_input(input).unwrap();
     let mut cnt = 0i64;
 
@@ -55,7 +55,7 @@ pub(crate) fn resolve_part1(input: &String) -> i64 {
     cnt
 }
 
-pub fn resolve_part2(input: &String) -> i64 {
+pub fn resolve_part2(input: &str) -> i64 {
     let mut input = unmarshal_input(input).unwrap();
 
     let mut total_removed = 0i64;

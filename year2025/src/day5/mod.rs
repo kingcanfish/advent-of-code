@@ -19,7 +19,7 @@ struct Input {
     ingredients: Vec<i64>,
 }
 
-fn unmarshal_input(content: &String) -> Result<Input, Box<dyn Error>> {
+fn unmarshal_input(content: &str) -> Result<Input, Box<dyn Error>> {
     let parts: Vec<&str> = content.split("\n\n").collect();
 
     if parts.len() != 2 {
@@ -49,17 +49,23 @@ fn unmarshal_input(content: &String) -> Result<Input, Box<dyn Error>> {
         .map(|line| line.trim().parse::<i64>().unwrap())
         .collect();
 
-    Ok(Input { ranges, ingredients })
+    Ok(Input {
+        ranges,
+        ingredients,
+    })
 }
 
-fn resolve_part1(input: &String) -> i64 {
+fn resolve_part1(input: &str) -> i64 {
     let data = unmarshal_input(input).unwrap();
 
     let mut fresh_count = 0;
 
     for ingredient_id in &data.ingredients {
         // Check if this ingredient ID falls into any range
-        let is_fresh = data.ranges.iter().any(|range| range.contains(*ingredient_id));
+        let is_fresh = data
+            .ranges
+            .iter()
+            .any(|range| range.contains(*ingredient_id));
         if is_fresh {
             fresh_count += 1;
         }
@@ -68,7 +74,7 @@ fn resolve_part1(input: &String) -> i64 {
     fresh_count
 }
 
-fn resolve_part2(input: &String) -> i64 {
+fn resolve_part2(input: &str) -> i64 {
     let data = unmarshal_input(input).unwrap();
 
     // Sort ranges by start position
@@ -94,10 +100,7 @@ fn resolve_part2(input: &String) -> i64 {
     }
 
     // Count total IDs in all merged ranges
-    merged_ranges
-        .iter()
-        .map(|r| r.end - r.start + 1)
-        .sum()
+    merged_ranges.iter().map(|r| r.end - r.start + 1).sum()
 }
 
 pub(crate) fn run() {
@@ -126,7 +129,7 @@ mod tests {
 11
 17
 32"#
-            .to_string();
+        .to_string();
         assert_eq!(resolve_part1(&input), 3);
     }
 
@@ -143,7 +146,7 @@ mod tests {
 11
 17
 32"#
-            .to_string();
+        .to_string();
         assert_eq!(resolve_part2(&input), 14);
     }
 }

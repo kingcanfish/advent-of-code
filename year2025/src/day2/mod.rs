@@ -92,13 +92,13 @@ mod tests {
     fn test_example1() {
         let input = vec![(11, 22), (95, 115), (998, 1012)];
         let result = solve_part1(&input);
-        assert_eq!(result, 2);
+        assert_eq!(result, 1142);
     }
     #[test]
     fn test_example2() {
         let input = vec![(998, 1012)];
         let result = solve_part1(&input);
-        assert_eq!(result, 0);
+        assert_eq!(result, 1010);
     }
     #[test]
     fn test_part2() {

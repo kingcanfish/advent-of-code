@@ -30,7 +30,6 @@ fn parse_connections(lines: &[String]) -> HashMap<String, Vec<String>> {
 
         let device = parts[0].trim().to_string();
         let outputs: Vec<String> = parts[1]
-            .trim()
             .split_whitespace()
             .map(|s| s.to_string())
             .collect();
@@ -191,7 +190,7 @@ pub(crate) fn run() {
     match read_input() {
         Ok(inputs) => {
             match resolve_part1(&inputs) {
-                Ok(result) => println!("Day11 part1: {}", result),
+                Ok(result) => print!("Day11 part1: {}, ", result),
                 Err(e) => println!("day11 part1 error: {}", e),
             }
             match resolve_part2(&inputs) {
